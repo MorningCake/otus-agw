@@ -1,0 +1,93 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'io.freefair.lombok' version '6.2.0'
+    id 'org.springframework.boot' version '2.7.14'
+}
+
+ext {
+    prjectVersion = '1.0.0-SNAPSHOT'
+    springCloudVersion = '3.1.9'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'ru.morningcake'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        cacheChangingModulesFor 0, 'seconds'
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+
+}
+
+dependencies {
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-gateway', version: project.springCloudVersion
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType(Test) {
+    systemProperty "file.encoding", "UTF-8"
+}
+
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier.set("sources")
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    archiveClassifier.set("javadoc")
+}
+
+test {
+//    useJUnitPlatform()
+}
+
+jar {
+    //    enabled = true
+    archiveBaseName = 'auth-gateway'
+    archiveVersion = project.prjectVersion
+}
+
+bootJar {
+    archiveFileName = 'auth-gateway.jar'
+    archiveBaseName = 'auth-gateway'
+    archiveVersion = project.prjectVersion
+    manifest {
+        attributes("Implementation-Title": "auth-gateway",
+                "Implementation-Version": project.prjectVersion)
+    }
+    launchScript()
+}
+
+

@@ -1,0 +1,21 @@
+pluginManagement {
+    repositories {
+        repositories {
+            mavenCentral()
+            gradlePluginPortal()
+//            maven {
+//                url = 'http://nexus.sigma.sbrf.ru:8099/nexus/content/repositories/gradle_plugins_proxy/'
+//                allowInsecureProtocol=true
+//            }
+//            maven {
+//                url = 'http://nexus.sigma.sbrf.ru:8099/nexus/content/groups/public/'
+//                allowInsecureProtocol=true
+//            }
+        }
+    }
+}
+
+
+enableFeaturePreview("VERSION_CATALOGS")
+
+rootProject.name = 'femida-ms-agw'
