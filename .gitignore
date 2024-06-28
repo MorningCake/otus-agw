@@ -52,5 +52,15 @@ Thumbs.db
 
 # Gradle
 .gradle
-/build/
 !gradle/wrapper/gradle-wrapper.jar
+#!build/libs/auth-gateway.jar
+
+#build/classes
+#build/generated
+#build/lombok
+#build/resources
+#build/tmp
+#build/libs/**
+#build/bootJarMainClassName
+/build/**
+/build/

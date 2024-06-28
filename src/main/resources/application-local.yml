@@ -44,6 +44,6 @@ spring:
         wiretap: true
       routes:
         - id: ms-user
-          uri: ${MS_USER_ADDRESS:http://localhost:11000}
+          uri: ${MS_USER_ADDRESS:http://localhost:11100}
           predicates:
-            - Path=/api/user/**
+            - Path=/api/user/**,/api/login,/api/registration

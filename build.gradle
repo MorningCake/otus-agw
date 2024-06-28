@@ -7,7 +7,8 @@ plugins {
 }
 
 ext {
-    prjectVersion = '1.0.0-SNAPSHOT'
+    projectVersion = '1.0.0-SNAPSHOT'
+    libsVersion = '1.0.0-SNAPSHOT'
     springCloudVersion = '3.1.9'
 }
 
@@ -30,15 +31,12 @@ configurations.all {
 repositories {
     mavenCentral()
     mavenLocal()
-
 }
 
 dependencies {
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-gateway', version: project.springCloudVersion
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'ru.morningcake', name: 'general-starter', version: project.libsVersion, changing: true
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
@@ -76,16 +74,16 @@ test {
 jar {
     //    enabled = true
     archiveBaseName = 'auth-gateway'
-    archiveVersion = project.prjectVersion
+    archiveVersion = project.projectVersion
 }
 
 bootJar {
     archiveFileName = 'auth-gateway.jar'
     archiveBaseName = 'auth-gateway'
-    archiveVersion = project.prjectVersion
+    archiveVersion = project.projectVersion
     manifest {
         attributes("Implementation-Title": "auth-gateway",
-                "Implementation-Version": project.prjectVersion)
+                "Implementation-Version": project.projectVersion)
     }
     launchScript()
 }
