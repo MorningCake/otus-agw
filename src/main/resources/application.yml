@@ -1,0 +1,49 @@
+server:
+  max-http-header-size: 1MB
+  compression:
+    enabled: true
+    min-response-size: 1
+  port: ${SPRING_APP_PORT}
+
+logging:
+  charset:
+    file: UTF-8
+  group.tomcat: org.apache.catalina, org.apache.coyote, org.apache.tomcat
+  level:
+    ru.sberbank.femida.ms.agw.config.filter: info #debug вкл. просмотра хэдеров и токена, info - откл.
+    root: info
+    tomcat: info
+    ru.sberbank.femida: info
+    org.springframework:
+      boot: info
+      cloud: info
+      web: info
+      core: info
+    io.netty: info
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: auth-gateway
+  jackson:
+    default-property-inclusion: non_null
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      httpclient:
+        wiretap: true
+      httpserver:
+        wiretap: true
+      routes:
+        - id: ms-user
+          uri: ${MS_USER_ROUTE}
+          predicates:
+            - Path=/api/user/**,/api/login,/api/registration

@@ -47,6 +47,8 @@ public class JwtMutationGlobalGatewayFilter implements GlobalFilter, Ordered {
   public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
     // Расширенное логирование (нельзя логировать Auth целиком) - включается в конфиге
     ServerHttpRequest request = exchange.getRequest();
+    log.debug(request.getMethod() + " " + request.getURI());
+    request.getHeaders().forEach((key, value) -> log.debug(key + ": " + value));
     // проверка роута. Если он на url логин или регистрации - токен не нужен. для остальных роутов - нужен, проверка
     if (request.getPath().toString().equals("/api/registration") && request.getMethod() == HttpMethod.POST) {
       return chain.filter(exchange);
