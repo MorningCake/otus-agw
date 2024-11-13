@@ -1,18 +1,16 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'io.spring.dependency-management' version '1.1.6'
     id 'io.freefair.lombok' version '6.2.0'
-    id 'org.springframework.boot' version '2.7.14'
+    id 'org.springframework.boot' version '3.3.2'
 }
 
 ext {
-    projectVersion = '1.0.0-SNAPSHOT'
-    libsVersion = '1.0.0-SNAPSHOT'
-    springCloudVersion = '3.1.9'
+    projectVersion = '1.1.0-SNAPSHOT'
+    libsVersion = '1.1.0-SNAPSHOT'
+    springCloudVersion = '2023.0.3'
 }
-
-apply plugin: 'io.spring.dependency-management'
 
 group = 'ru.morningcake'
 
@@ -34,13 +32,13 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-gateway', version: project.springCloudVersion
-
     implementation group: 'ru.morningcake', name: 'general-starter', version: project.libsVersion, changing: true
+
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-gateway', version: project.springCloudVersion
 }
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_21
+targetCompatibility = JavaVersion.VERSION_21
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
