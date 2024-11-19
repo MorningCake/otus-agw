@@ -50,9 +50,9 @@ public class JwtMutationGlobalGatewayFilter implements GlobalFilter, Ordered {
     log.debug(request.getMethod() + " " + request.getURI());
     request.getHeaders().forEach((key, value) -> log.debug(key + ": " + value));
     // проверка роута. Если он на url логин или регистрации - токен не нужен. для остальных роутов - нужен, проверка
-    if (request.getPath().toString().equals("/api/registration") && request.getMethod() == HttpMethod.POST) {
+    if (request.getPath().toString().equals("/api/ms-user/registration") && request.getMethod() == HttpMethod.POST) {
       return chain.filter(exchange);
-    } else if (request.getPath().toString().equals("/api/login") && request.getMethod() == HttpMethod.POST) {
+    } else if (request.getPath().toString().equals("/api/ms-user/login") && request.getMethod() == HttpMethod.POST) {
       // при логине вычитать хэдер с jwt и положит данные в мапу
       ServerHttpResponse response = exchange.getResponse();
       DataBufferFactory dataBufferFactory = response.bufferFactory();

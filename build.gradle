@@ -1,15 +1,15 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'io.spring.dependency-management' version '1.1.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'io.freefair.lombok' version '6.2.0'
-    id 'org.springframework.boot' version '3.3.2'
+    id 'org.springframework.boot' version '2.7.14'
 }
 
 ext {
-    projectVersion = '1.1.0-SNAPSHOT'
-    libsVersion = '1.1.0-SNAPSHOT'
-    springCloudVersion = '2023.0.3'
+    projectVersion = '1.2.0-SNAPSHOT'
+    libsVersion = '1.2.0-SNAPSHOT'
+    springCloudVersion = '3.1.9'
 }
 
 group = 'ru.morningcake'
@@ -33,12 +33,11 @@ repositories {
 
 dependencies {
     implementation group: 'ru.morningcake', name: 'general-starter', version: project.libsVersion, changing: true
-
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-gateway', version: project.springCloudVersion
 }
 
-sourceCompatibility = JavaVersion.VERSION_21
-targetCompatibility = JavaVersion.VERSION_21
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -66,7 +65,7 @@ task javadocJar(type: Jar) {
 }
 
 test {
-//    useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 jar {

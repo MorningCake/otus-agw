@@ -46,4 +46,4 @@ spring:
         - id: ms-user
           uri: ${MS_USER_ROUTE}
           predicates:
-            - Path=/api/user/**,/api/login,/api/registration
+            - Path=/api/ms-user/**
